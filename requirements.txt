@@ -1,5 +1,5 @@
+numpy
 pandas
 requests
 python-dotenv
 scikit-learn
-numpy
