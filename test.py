@@ -5,7 +5,7 @@ from util.safe_parse_json import safe_parse_json
 from util.entropy import entropy_clasesocial, entropy_genero
 from util.validate import validate_distribution
 from util.max import max_clasesocial, max_genero
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 import os
 import json
 from dotenv import load_dotenv
@@ -157,13 +157,13 @@ merged_df = data_df.merge(
     how="inner"
 )
 
-print(merged_df[["id","true_genero", "pred_genero"]].head())
+#print(merged_df[["id","true_genero", "pred_genero"]].head())
 print(" ")
-print("porcentaje de aciertos")
+print("accuracy")
 print("genero")
-print((merged_df["true_genero"]==merged_df["pred_genero"]).mean())
+print(accuracy_score(merged_df["true_genero"],merged_df["pred_genero"]))
 print("clasesocial")
-print((merged_df["true_clasesocial"]==merged_df["pred_clasesocial"]).mean())
+print(accuracy_score(merged_df["true_clasesocial"],merged_df["pred_clasesocial"]))
 
 print(" ")
 print("matrices de confusión")
