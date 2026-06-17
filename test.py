@@ -223,3 +223,29 @@ print("genero")
 print(merged_df.groupby("correct_genero")["entropia_genero"].mean())
 print("clasesocial")
 print(merged_df.groupby("correct_clasesocial")["entropia_clasesocial"].mean())
+
+summary = pd.DataFrame({
+    "attribute": ["genero", "clasesocial"],
+    "accuracy": [
+        accuracy_score(
+            merged_df["true_genero"],
+            merged_df["pred_genero"]
+        ),
+        accuracy_score(
+            merged_df["true_clasesocial"],
+            merged_df["pred_clasesocial"]
+        )
+    ],
+    "cohen kappa": [
+        cohen_kappa_score(
+            merged_df["true_genero"],
+            merged_df["pred_genero"]
+        ),
+        cohen_kappa_score(
+            merged_df["true_clasesocial"],
+            merged_df["pred_clasesocial"]
+        )
+    ]
+})
+
+print(summary)
