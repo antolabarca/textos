@@ -5,7 +5,7 @@ from util.safe_parse_json import safe_parse_json
 from util.entropy import entropy_clasesocial, entropy_genero
 from util.validate import validate_distribution
 from util.max import max_clasesocial, max_genero
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, cohen_kappa_score
 import os
 import json
 from dotenv import load_dotenv
@@ -178,3 +178,29 @@ print("genero")
 print(classification_report(merged_df["true_genero"], merged_df["pred_genero"]))
 print("clasesocial")
 print(classification_report(merged_df["true_clasesocial"], merged_df["pred_clasesocial"]))
+
+print(" ")
+print("cohen kappa score")
+print("genero")
+print(cohen_kappa_score(merged_df["true_genero"], merged_df["pred_genero"]))
+print("clasesocial")
+print(cohen_kappa_score(merged_df["true_clasesocial"], merged_df["pred_clasesocial"]))
+
+merged_df["correct_genero"] = (
+    merged_df["true_genero"]
+    ==
+    merged_df["pred_genero"]
+)
+
+merged_df["correct_clasesocial"] = (
+    merged_df["true_clasesocial"]
+    ==
+    merged_df["pred_clasesocial"]
+)
+
+print(" ")
+print("confianza según correctitud")
+print("genero")
+print(merged_df.groupby("correct_genero")["conf_genero"].mean())
+print("clasesocial")
+print(merged_df.groupby("correct_clasesocial")["conf_clasesocial"].mean())
