@@ -27,7 +27,7 @@ for _, row in data_df.iterrows():
     prompt = build_inference_prompt(row["text"])
     ans = generate_with_openrouter(prompt, "openai/gpt-4.1-mini")
     raw_results.append(ans)
-    #print(repr(ans))
+    # print(repr(ans))
     parsed_ans = safe_parse_json(ans)
     if not validate_distribution(parsed_ans["genero"]["distribution"]):
         print("Invalid distribution")
@@ -50,7 +50,7 @@ for _, row in data_df.iterrows():
 
 raw_results_df = pd.DataFrame(raw_results)
 results_df = pd.DataFrame(results)
-#print(results_df.head())
+print(results_df.head())
 
 print(results_df["pred_genero"].value_counts())
 print(results_df["pred_clasesocial"].value_counts())
